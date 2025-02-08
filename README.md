@@ -34,3 +34,16 @@ elif marks>=80 and marks<=90:
     print('you will get a phone')
 else:
     print('no phone till one month')
+
+
+
+    marks = 97
+if marks>=90:
+    print("you will go to trip")
+elif marks >=80 and marks <90:
+        print("you will get a new phone")
+elif marks >=70 and marks <80:
+            print("you will get a book")
+else:
+                print("you have to give your phn back")
+
