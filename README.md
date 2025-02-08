@@ -47,3 +47,14 @@ elif marks >=70 and marks <80:
 else:
                 print("you have to give your phn back")
 
+#write a program to check whether a passed letter is vowel or not
+
+letter=input("enter a number here")
+if letter in "a e i o u ":
+    print ("it is a vowel")
+else:
+    print("it is not a vowel")
+
+
+
+
