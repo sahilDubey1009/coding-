@@ -73,4 +73,4 @@ elif num>=100 and num <=999:
 elif num>1000 and num <=9999:
     print("it is a four digit number")
 else:
-#    print("it is five or more digit number")
+    print("it is five or more digit number")
