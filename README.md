@@ -82,3 +82,9 @@ b=40
 a,b=b,a
 print(b)
 print(a)
+
+o="sahil"
+b="dubey"
+o,b=b,o
+print(o)
+print(b)
