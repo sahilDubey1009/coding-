@@ -100,3 +100,16 @@ length=float(input("enter the length"))
 width =float(input("enter the width"))
 area=length*width
 print("the area of rectangle, :area")
+
+#area of rectangle
+
+length=float(input("enter the length"))
+width =float(input("enter the width"))
+area=length*width
+print("the area of rectangle, :area")
+
+#area of circle
+
+radius = float(input("enter the radius"))
+area=radius**2
+print("enter the area of circle,:area")
