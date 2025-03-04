@@ -88,3 +88,15 @@ b="dubey"
 o,b=b,o
 print(o)
 print(b)
+
+#area of square 
+side = float(input("Enter the length of a side of the square: "))
+area = side**2
+print(f"The area of the square is: area")
+
+#area of rectangle
+
+length=float(input("enter the length"))
+width =float(input("enter the width"))
+area=length*width
+print("the area of rectangle, :area")
