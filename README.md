@@ -113,3 +113,15 @@ print("the area of rectangle, :area")
 radius = float(input("enter the radius"))
 area=radius**2
 print("enter the area of circle,:area")
+
+
+#logical operator
+a = 10
+b = 5
+c = 20
+
+print(a > b and c > a)
+
+print(a > b or c < a)
+
+print(not (a > b))
