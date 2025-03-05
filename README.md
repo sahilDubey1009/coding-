@@ -141,3 +141,13 @@ a=99
 b=55
 c=9
 print(not(a>b))#shows opposite result#shows true if it is false
+
+#swap using 3rd variable
+a=10
+b=20
+
+print("Berfore Swapping: A:",a," B:",b)
+temp=a #temp=10
+a=b  #a=20
+b=temp  #b=10
+print("After Swapping: A:",a," B:",b)
