@@ -125,3 +125,19 @@ print(a > b and c > a)
 print(a > b or c < a)
 
 print(not (a > b))
+
+#and logical operator
+a=10
+b=5
+c=20
+print(a>b and c>a)#both should be true
+#or logical operator
+a=66
+b=8
+c=77
+print(a>b or c<a)#only one can be true
+#not logical operator
+a=99
+b=55
+c=9
+print(not(a>b))#shows opposite result#shows true if it is false
