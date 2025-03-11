@@ -20,8 +20,8 @@ if marks>=90:
   
   marks  =  87
 if marks >=90:
-     print("you will get a phone")
-     else: 
+     print("you will get a phone")     
+     
          print("no phone for 1 week")
          print("thank you")
 
@@ -151,3 +151,69 @@ temp=a #temp=10
 a=b  #a=20
 b=temp  #b=10
 print("After Swapping: A:",a," B:",b)
+
+#lists in python 
+#List items are ordered, changeable, and allow duplicate value
+#When we say that lists are ordered, it means that the items have a defined order, and that order will not change.
+
+#If you add new items to a list, the new items will be placed at the end of the list.
+
+a= ["apple", "banana", "cherry"]
+print(a)
+#What will be the result of the following syntax:
+mylist = ['apple', 'banana', 'cherry']
+print(mylist[1])
+#output
+banana
+#What will be the result of the following syntax:
+mylist = ['apple', 'banana', 'banana', 'cherry']
+print(mylist[2])
+#output
+banana
+#Select the correct function for returning the number of items in a list:
+
+thislist = ['apple', 'banana', 'cherry']
+print(len(thislist))
+
+#PYTHON ACCESS LISTS
+
+#What will be the result of the following syntax:
+mylist = ['apple', 'banana', 'cherry']
+print(mylist[-1])
+#output
+cherry
+
+#Print the second item in the fruits list.
+
+fruits = ["apple", "banana", "cherry"]
+print(fruits[1])
+
+#What will be the result of the following syntax:
+mylist = ['apple', 'banana', 'cherry', 'orange', 'kiwi']
+print(mylist[1:4])
+#output
+['banana', 'cherry', 'orange']
+
+#Use a range of indexes to print the third, fourth, and fifth item in the list.
+
+
+fruits = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]
+print(fruits[2:5])
+#output
+['cherry', 'orange', 'kiwi']
+
+#PYTHON CHANGE LISTS
+
+#What will be the result of the following syntax:
+mylist = ['apple', 'banana', 'cherry']
+mylist[0] = 'kiwi'
+print(mylist[1])
+#output
+banana
+
+#What will be the result of the following syntax:
+mylist = ['apple', 'banana', 'cherry']
+mylist[1:2] = ['kiwi', 'mango']
+print(mylist[2])
+#output
+mango
