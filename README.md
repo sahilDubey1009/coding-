@@ -217,3 +217,16 @@ mylist[1:2] = ['kiwi', 'mango']
 print(mylist[2])
 #output
 mango
+#if else statements
+num = int(input("Enter a number: "))
+if num % 2 == 0:
+    print("Even number")
+else:
+    print("Odd number")
+
+    age = int(input("Enter your age: "))
+if age >= 18:
+    print("Eligible to vote")
+else:
+    print("Not eligible to vote")
+    
