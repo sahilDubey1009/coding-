@@ -229,4 +229,31 @@ if age >= 18:
     print("Eligible to vote")
 else:
     print("Not eligible to vote")
-    
+
+    #oops 
+    #class/object
+   # Create an object of MyClass called p1:
+class MyClass:
+  x = 5
+p1=MyClass()
+
+# Use the p1 object to print the value of x:
+class MyClass:
+  x = 5
+
+p1 = MyClass()
+print(p1.x)
+
+# Insert the missing parts to make the code return: John(36):
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return f'{self.name}({self.age}):'
+
+# Example usage:
+p1 = Person('John', 36)
+print(p1)
+
