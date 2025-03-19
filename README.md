@@ -257,3 +257,55 @@ class Person:
 p1 = Person('John', 36)
 print(p1)
 
+# When the class object is represented as a string, there is a function that controls what should be returned, which one?
+_str__()
+
+# What is a correct syntax for deleting an object named person in Python?
+del person
+
+# if else 
+What will be the result of the following code:
+x = 5
+y = 8
+if x > y:
+  print('Hello')
+else:
+  print('Welcome')
+  #o/p
+  welcome
+  
+ # Print "Hello World" if a is greater than b.
+a = 50
+b = 10
+if a > b:
+
+  print("Hello World")
+
+#  Print "Hello World" if a is not equal to b.
+a = 50
+b = 10
+if a != b:
+
+  print("Hello World")
+
+# Print "Yes" if a is equal to b, otherwise print "No".
+
+a = 50
+b = 10
+if a == b:
+  print("Yes")
+else:
+  print("No")
+
+#  Print "1" if a is equal to b, print "2" if a is greater than b, otherwise print "3".
+a = 50
+b = 10
+if a == b :
+
+  print("1")
+elif  a > b :
+ 
+  print("2")
+else:
+
+  print("3")
