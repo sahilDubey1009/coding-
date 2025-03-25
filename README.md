@@ -322,3 +322,58 @@ print(p1.age)
 
 # OUTPUT
 JOHN , 36
+
+# The string representation of an object WITH the __str__() function:
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+  def __str__(self):
+    return f"{self.name}({self.age})"    
+
+p1 = Person("John", 36)
+
+print(p1)
+
+# five types of inheritance
+# single inheritance
+class Parent:
+    def show(self):
+        print("This is the parent class")
+
+class Child(Parent):  # Inheriting Parent class
+    def display(self):
+        print("This is the child class")
+
+obj = Child()
+obj.show()   # Inherited method
+obj.display()
+
+# output
+This is the parent class
+This is the child class
+
+# multiple inheritance
+
+class Parent1:
+    def feature1(self):
+        print("Feature from Parent1")
+
+class Parent2:
+    def feature2(self):
+        print("Feature from Parent2")
+
+class Child(Parent1, Parent2):  # Inheriting from both parents
+    def feature3(self):
+        print("Feature from Child")
+
+obj = Child()
+obj.feature1()
+obj.feature2()
+obj.feature3()
+
+# output
+Feature from Parent1
+Feature from Parent2
+Feature from Child
