@@ -336,7 +336,7 @@ p1 = Person("John", 36)
 
 print(p1)
 
-# five types of inheritance
+#  types of inheritance
 # single inheritance
 class Parent:
     def show(self):
