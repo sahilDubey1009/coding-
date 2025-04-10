@@ -377,3 +377,53 @@ obj.feature3()
 Feature from Parent1
 Feature from Parent2
 Feature from Child
+
+# Exit the loop when x is "banana", but this time the break comes before the print:
+
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  if x == "banana":
+    break
+  print(x)
+
+ # Do not print banana:
+
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  if x == "banana":
+    continue
+  print(x)
+
+# Print all numbers from 0 to 5, and print a message when the loop has ended:
+
+for x in range(6):
+  print(x)
+else:
+  print("Finally finished!")
+
+# Break the loop when x is 3, and see what happens with the else block:
+
+for x in range(6):
+  if x == 3: break
+  print(x)
+else:
+  print("Finally finished!")
+
+  # Print i as long as i is less than 6:
+
+i = 1
+while i < 6:
+  print(i)
+  i += 1
+  
+  # 
+  Print a message once the condition is false:
+
+i = 1
+while i < 6:
+  print(i)
+  i += 1
+else:
+  print("i is no longer less than 6")
+
+
