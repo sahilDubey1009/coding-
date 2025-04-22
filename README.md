@@ -426,4 +426,28 @@ while i < 6:
 else:
   print("i is no longer less than 6")
 
+# inheritance in python
+
+# Parent class
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def display_info(self):
+        print(f"Name: {self.name}")
+        print(f"Age: {self.age}")
+
+# Child class
+class Student(Person):
+    def __init__(self, name, age, student_id):
+        # Call the constructor of the parent class
+        super().__init__(name, age)
+        self.student_id = student_id
+
+    def display_student_info(self):
+        # Call the method from the parent class
+        self.display_info()
+        print(f"Student ID: {self.student_id}")
+
 
