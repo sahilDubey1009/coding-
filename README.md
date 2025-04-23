@@ -450,4 +450,41 @@ class Student(Person):
         self.display_info()
         print(f"Student ID: {self.student_id}")
 
+  # polymorphism 
+  class Animal:
+    def speak(self):
+        print("The animal makes a sound.")
+
+class Dog(Animal):
+    def speak(self):
+        print("The dog barks.")
+
+class Cat(Animal):
+    def speak(self):
+        print("The cat meows.")
+
+# Function that takes any Animal and calls speak
+def make_animal_speak(animal):
+    animal.speak()
+
+# Create objects
+animal1 = Dog()
+animal2 = Cat()
+
+# Call the same function with different objects
+make_animal_speak(animal1)  # Output: The dog barks.
+make_animal_speak(animal2)  # Output: The cat meows.
+
+# COUNTDOWN TIMER
+
+import time
+seconds=int(input("enter the time in seconds"))
+while seconds>0:
+    print(f"Time left:{seconds}seconds")
+    time.sleep(1)
+    seconds-=1
+    print("Time's upo!")
+
+
+
 
