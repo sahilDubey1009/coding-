@@ -485,6 +485,24 @@ while seconds>0:
     seconds-=1
     print("Time's upo!")
 
+# boolean in python
+x = "Hello"
+y = 15
 
+print(bool(x))
+print(bool(y))
+
+# using if else
+def myFunction() :
+  return True
+
+if myFunction():
+  print("YES!")
+else:
+  print("NO!")
+
+# string length
+a = "Hello, World!"
+print(len(a))
 
 
