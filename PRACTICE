@@ -505,4 +505,247 @@ else:
 a = "Hello, World!"
 print(len(a))
 
+SQL STARTS
 
+CREATE DATABASE MYDATABASE;
+drop database mydatabase;
+
+use mydatabase;
+
+CREATE TABLE titanic (
+
+PassengerID int primary key, 
+Name varchar(100), 
+Sex varchar(50), 
+Age int, 
+Pclass int, 
+Survived int , 
+Fare int, 
+Embarked varchar(5)
+);
+
+INSERT into titanic values(1, 'Braund, Mr. Owen Harris', 'male', 22, 3, 0, 7.25, 'S');
+INSERT into titanic values(2, 'Cumings, Mrs. John Bradley (Florence Briggs Thayer)', 'female', 38, 1, 1, 71.2833, 'C');
+INSERT into titanic values(3, 'Heikkinen, Miss. Laina', 'female', 26, 3, 1, 7.925, 'S');
+INSERT into titanic values(4, 'Futrelle, Mrs. Jacques Heath (Lily May Peel)', 'female', 35, 1, 1, 53.1, 'S');
+INSERT into titanic values(5, 'Allen, Mr. William Henry', 'male', 35, 3, 0, 8.05, 'S');
+INSERT into titanic values(6, 'Moran, Mr. James', 'male', NULL, 3, 0, 8.4583, 'Q');
+INSERT into titanic values(7, 'McCarthy, Mr. Timothy J', 'male', 54, 1, 0, 51.8625, 'S');
+INSERT into titanic values(8, 'Palsson, Master. Gosta Leonard', 'male', 2, 3, 0, 21.075, 'S');
+INSERT into titanic values(9, 'Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)', 'female', 27, 3, 1, 11.1333, 'S');
+INSERT into titanic values(11, 'Sandstrom, Miss. Marguerite Rut', 'female', 4, 3, 1, 16.7, 'S');
+INSERT into titanic values(12, 'Bonnell, Miss. Elizabeth', 'female', 58, 1, 1, 26.55, 'S');
+INSERT into titanic values(13, 'Saundercock, Mr. William Henry', 'male', 20, 3, 0, 8.05, 'S');
+INSERT into titanic values(14, 'Andersson, Mr. Anders Johan', 'male', 39, 3, 0, 31.275, 'S');
+INSERT into titanic values(15, 'Vestrom, Miss. Hulda Amanda Adolfina', 'female', 14, 3, 0, 7.8542, 'S');
+INSERT into titanic values(16, 'Hewlett, Mrs. (Mary D Kingcome)', 'female', 55, 2, 1, 16.0, 'S');
+INSERT into titanic values(17, 'Rice, Master. Eugene', 'male', 2, 3, 0, 29.125, 'Q');
+INSERT into titanic values(18, 'Williams, Mr. Charles Eugene', 'male', NULL, 2, 0, 13.0, 'S');
+INSERT into titanic values(19, 'Vander Planke, Mrs. Julius (Emelia Maria Vandemoortele)', 'female', 31, 3, 0, 18.0, 'S');
+INSERT into titanic values(20, 'Masselmani, Mrs. Fatima', 'female', NULL, 3, 0, 7.225, 'C');
+
+4) Print ALL DATA 
+SELECT * FROM Titanic;
+
+
+5) Filtering with WHERE
+-- All female passengers who survived
+
+SELECT Name, Age FROM Titanic
+WHERE Sex = 'female' and (Survived = 1 or Pclass = 1);
+
+-- Passengers older than 30
+
+SELECT PassengerID, Name, Age FROM Titanic
+WHERE Age > 30;
+
+---/---------/---------/--------/---------/---------/---
+
+6) Sorting with ORDER BY
+-- Top 5 highest fares
+SELECT Name, Fare FROM Titanic
+ORDER BY Fare DESC
+LIMIT 5;
+
+---/---------/---------/--------/---------/---------/---
+
+7) Insert New Row
+-- Average age of all passengers
+SELECT AVG(Age) AS AverageAge FROM Titanic;
+
+-- Count of survivors by class
+SELECT Pclass, COUNT(*) AS TotalSurvivors
+FROM Titanic
+WHERE Survived = 1
+GROUP BY Pclass;
+
+---/---------/---------/--------/---------/---------/---
+
+8) Delete Row
+-- Delete a row where Fare is less than 5
+DELETE FROM Titanic
+WHERE Fare < 5;
+
+---/---------/---------/--------/---------/---------/---
+
+9) Update Existing Row
+
+Syntax= 
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+
+-- Update age of passenger ID 6
+UPDATE Titanic
+SET Age = 30
+WHERE PassengerID = 6;
+
+---/---------/---------/--------/---------/---------/---
+
+10) Handling NULL Values
+-- Select passengers with unknown age
+SELECT * FROM Titanic
+WHERE Age IS NULL;
+
+-- Replace NULL ages with average age
+UPDATE Titanic
+SET Age = (SELECT AVG(Age) FROM Titanic WHERE Age IS NOT NULL)
+WHERE Age IS NULL;
+
+---/---------/---------/--------/---------/---------/---
+
+CREATE DATABASE STUDENTS;
+drop database students;
+use mydatabase;
+CREATE TABLE Customers (
+    Customer_ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Gender VARCHAR(10),
+    City VARCHAR(50),
+    Phone VARCHAR(20),
+    RegistrationDate DATE
+);
+drop table Customers;
+
+    INSERT into Customers ( Customer_ID, Name, Email, Gender, City, Phone, RegistrationDate ) values
+    (1, "Amit Sharma", "amit.sharma@gmail.com", "Male", "Delhi", "9876543210", "2024-01-15"),
+    (2, "Priya Singh", "priya.singh@yahoo.com", "Female", "Mumbai", "9823456789", "2024-02-10"),
+	(3, "Ravi Verma", "ravi.v@gmail.com", "Male", "Lucknow", "9012345678", "2024-03-05"),
+	(4, "Sneha Patil", "sneha.patil@hotmail.com", "Female", "Pune", "9765432109", "2024-01-25"),
+    (5, "Ankit Mehra", "ankit.mehra@outlook.com", "Male", "Jaipur", "9934567810", "2024-02-22"),
+    (6, "Riya Jain", "riya.jain@gmail.com", "Female", "Indore", "9845612378", "2024-03-15"),
+	(7, "Deepak Joshi", "deepak.j@rediffmail.com", "Male", "Hyderabad", "9789012345", "2024-04-01"),
+    (8, "Kavita Desai", "kavita.d@gmail.com", "Female", "Ahmedabad", "9876543012", "2024-04-05"),
+    (9, "Manoj Kumar", "manoj.kumar@meesho.com", "Male", "Bangalore", "9912345670", "2024-02-18"),
+    (10, "Pooja Shah", "pooja.shah@gmail.com", "Female", "Surat", "9998765432", "2024-03-28");
+
+4) Print ALL DATA 
+SELECT * FROM Customers;
+
+
+CREATE DATABASE COLLEGE;
+DROP DATABASE COLLEGE;
+use COLLEGE;
+
+CREATE TABLE STUDENTS(
+ID INT PRIMARY KEY,
+NAME VARCHAR (50),
+AGE INT NOT NULL
+);
+DROP TABLE STUDENTS;
+
+INSERT INTO STUDENTS values ( 1,"AMAN",26);
+INSERT INTO STUDENTS values ( 2,"SHRADHA",24);
+
+SELECT * FROM STUDENTS;
+
+SHOW DATABASES;
+
+CREATE TABLE STUDENTS (
+rollno INT PRIMARY KEY,
+name VARCHAR(50)
+);
+
+SELECT * FROM STUDENTS;
+
+INSERT INTO STUDENTS
+(rollno , name)
+VALUES
+( 101 , "KARAN"),
+( 102 , "ARJUN"),
+( 103 , "RAM");
+
+INSERT INTO STUDENTS
+(rollno , name)
+VALUES
+( 104 , "SHYAM");
+
+
+CREATE TABLE t1 (
+id int not null,
+primary key (id)
+);
+
+INSERT INTO t1 VALUES(101);
+INSERT INTO t1 VALUES(101);
+
+SELECT * FROM t1;
+
+create table emp (
+id int ,
+salary int  default 25000); 
+
+INSERT INTO emp (id)values (101);
+select * from emp
+
+CREATE DATABASE XYZ;
+USE XYZ;
+
+CREATE TABLE EMPLOYEE(
+ID INT PRIMARY KEY,
+NAME VARCHAR(50),
+SALARY int
+);
+
+INSERT INTO EMPLOYEE
+(ID,NAME,SALARY)
+VALUES
+
+(1,"ADAM",25000),
+(2,"BOB",30000),
+(3,"CASEY",40000);
+
+SELECT * FROM EMPLOYEE;
+
+create database if not exists college;
+use college ; 
+create table student (
+rollno int primary key,
+name varchar (20),
+marks int not null,
+grade varchar(1),
+city varchar (20)
+);
+ 
+INSERT INTO student 
+(rollno, name, marks, grade, city)
+VALUES
+(101, 'anil', 78, 'c', 'pune'),
+(102, 'bhumika', 93, 'a', 'mumbai'),
+(103, 'chetan', 85, 'b', 'mumbai'),
+(104, 'dhruv', 96, 'a', 'delhi'),
+(105, 'emanuel', 12, 'f', 'delhi'),
+(106, 'farah', 82, 'b', 'delhi');
+
+select distinct city from student ;
+
+select * from student where marks = 93;
+select * from student where city = "mumbai";
+select * from student where city not in ("delhi","mumbai");
+select * from student limit 2;
+select * from student order by marks desc ;
+select * from student order by marks desc limit 3;
+select sum(marks) from student;
+select count(name) from student;
+select city , count(name) from student group by city;
