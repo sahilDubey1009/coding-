@@ -749,3 +749,43 @@ select * from student order by marks desc limit 3;
 select sum(marks) from student;
 select count(name) from student;
 select city , count(name) from student group by city;
+
+# write a query to find avg marks in each city in ascending order
+
+select city,avg(marks)
+from student 
+group by city
+order by city;
+
+select city
+from student
+where grade= 'A'
+group by city
+having max(marks) >= 93
+order by city asc;
+
+|||UPDATE|||
+
+update student
+set grade = 'o'
+where grade = 'A';
+
+set sql_safe_updates = 0 ;
+
+select * from student;
+
+update student 
+set grade = "B" 
+where marks between 80 and 90 ;
+
+update student
+set marks = 23
+where marks = 83;
+
+update student 
+set marks = marks +1;
+
+||| DELETE |||
+
+delete from student
+where marks < 33;
