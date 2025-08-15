@@ -789,3 +789,231 @@ set marks = marks +1;
 
 delete from student
 where marks < 33;
+
+
+@@@@ MACHINE LEARNING'''
+
+KNN.ipynb
+KNN.ipynb_
+
+[ ]
+import numpy as np
+from sklearn.neighbors import NearestNeighbors
+import pandas as pd
+
+[ ]
+# 1️⃣ Create sample user-item interaction data
+data = {
+    'User': ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E'],
+    'Product': ['Laptop', 'Mouse', 'Laptop', 'Keyboard', 'Mouse', 'Keyboard', 'Laptop', 'Mouse', 'Keyboard'],
+    'Rating': [5, 3, 4, 4, 2, 5, 4, 2, 5]
+}
+
+[ ]
+df = pd.DataFrame(data)
+df.head(5)
+
+
+[ ]
+# 2️⃣ Create user-item matrix
+user_item_matrix = df.pivot_table(index='User', columns='Product', values='Rating').fillna(0)
+
+print("\nUser-Item Matrix:")
+print(user_item_matrix)
+
+User-Item Matrix:
+Product  Keyboard  Laptop  Mouse
+User                            
+A             0.0     5.0    3.0
+B             4.0     4.0    0.0
+C             5.0     0.0    2.0
+D             0.0     4.0    2.0
+E             5.0     0.0    0.0
+
+[ ]
+# 3️⃣ Train KNN
+model_knn = NearestNeighbors(metric='cosine', algorithm='brute')
+model_knn.fit(user_item_matrix)
+
+
+[ ]
+# 4️⃣ Recommendation function
+def recommend_products(target_user, n_neighbors=2):
+    print(f"\nRecommendations for User: {target_user}")
+
+    user_index = user_item_matrix.index.get_loc(target_user)
+    distances, indices = model_
+    knn.kneighbors(user_item_matrix.iloc[user_index, :].values.reshape(1, -1), n_neighbors=n_neighbors+1)
+
+    similar_users = [user_item_matrix.index[i] for i in indices.flatten() if user_item_matrix.index[i] != target_user]
+    print(f"Similar Users: {similar_users}")
+
+    # Products the target user has already interacted with
+    target_user_products = set(df[df['User'] == target_user]['Product'].values)
+
+    # Collect products from similar users
+    recommended_products = set()
+    for user in similar_users:
+        user_products = set(df[df['User'] == user]['Product'].values)
+        recommended_products.update(user_products - target_user_products)
+
+    if recommended_products:
+        print("Recommended Products:", recommended_products)
+    else:
+        print("No new recommendations. User has similar preferences to neighbors.")
+
+[ ]
+# 5️⃣ Test the recommendation system
+recommend_products('C')
+recommend_products('A')
+recommend_products('E')
+
+
+[ ]
+
+Start coding or generate with AI.
+
+[ ]
+
+Start coding or generate with AI.
+
+[ ]
+
+Start coding or generate with AI.
+EG = 2) k-NN Classification on Wine Quality (Real-world dataset)
+0-5 = Low
+
+6 = Medium
+
+7-10 = High
+
+
+[ ]
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+Load dataset
+
+[ ]
+df = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv', sep=';')
+Create quality category
+
+[ ]
+def quality_category(q):
+    if q <= 5:
+        return 0  # Low
+    elif q == 6:
+        return 1  # Medium
+    else:
+
+        return 2  # High
+
+df['quality_cat'] = df['quality'].apply(quality_category)
+.# Features and target
+
+
+[ ]
+X = df.drop(['quality', 'quality_cat'], axis=1)
+y = df['quality_cat']
+
+
+# Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+[ ]
+# Scale
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+k-NN Classifier
+
+[ ]
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train_scaled, y_train)
+
+New prediction
+
+[ ]
+new_wine = pd.DataFrame({
+    'fixed acidity': [7.4],
+    'volatile acidity': [7.7],
+    'citric acid': [6],
+    'residual sugar': [15.9],
+    'chlorides': [87.076],
+    'free sulfur dioxide': [11],
+    'total sulfur dioxide': [34],
+    'density': [32.9978],
+    'pH': [3.51],
+    'sulphates': [0.56],
+    'alcohol': [40.4]
+})
+
+[ ]
+new_wine_scaled = scaler.transform(new_wine)
+prediction = knn.predict(new_wine_scaled)
+
+category_map = {0: 'Low', 1: 'Medium', 2: 'High'}
+print(f"Predicted wine quality category: {category_map[prediction[0]]}")
+Predicted wine quality category: Low
+
+[ ]
+
+Start coding or generate with AI.
+
+[ ]
+
+Start coding or generate with AI.
+
+[ ]
+
+Start coding or generate with AI.
+EG = 3) k-NN Regression on Wine Quality (Real-world dataset)
+
+[ ]
+from sklearn.neighbors import KNeighborsRegressor
+
+[ ]
+df = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv', sep=';')
+
+def quality_category(q):
+    if q <= 5:
+        return 0  # Low
+    elif q == 6:
+        return 1  # Medium
+    else:
+        return 2  # High
+
+df['quality_cat'] = df['quality'].apply(quality_category)
+
+df.head(16)
+
+Features and target
+
+[ ]
+X = df.drop(['quality', 'quality_cat'], axis=1)
+y = df['quality']
+
+[ ]
+# Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.42, random_state=42)
+
+# Scale
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+k-NN Regressor
+
+[ ]
+knn_reg = KNeighborsRegressor(n_neighbors=5)
+knn_reg.fit(X_train_scaled, y_train)
+
+New prediction
+
+[ ]
+predicted_quality = knn_reg.predict(new_wine_scaled)
+
+print(f"Predicted wine quality score: {predicted_quality[0]:.2f}")
+Predicted wine quality score: 5.60
+
+[ ]
