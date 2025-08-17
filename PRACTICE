@@ -1027,3 +1027,10 @@ labels = ["apple","apple","orange","orange"]
 clf = DecisionTreeClassifier()
 clf = clf.fit(features, labels)
 prediction = clf.predict([[150,1]])
+from sklearn.tree import plot_tree
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(11, 6))
+plot_tree(clf,feature_names=["weights","color"],class_names=["apple","orange"],filled=True)
+plt.show()
+
