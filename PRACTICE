@@ -1034,3 +1034,282 @@ plt.figure(figsize=(11, 6))
 plot_tree(clf,feature_names=["weights","color"],class_names=["apple","orange"],filled=True)
 plt.show()
 
+
+SELECT 
+    (SELECT DISTINCT salary
+     FROM Employee
+     ORDER BY salary DESC
+     LIMIT 1 OFFSET 1) AS SecondHighestSalary;
+
+SELECT DISTINCT l1.num AS ConsecutiveNums
+FROM Logs l1
+JOIN Logs l2 ON l1.id = l2.id - 1 AND l1.num = l2.num
+JOIN Logs l3 ON l1.id = l3.id - 2 AND l1.num = l3.num;
+
+SELECT 
+    d.name AS Department,
+    e.name AS Employee,
+    e.salary AS Salary
+FROM Employee e
+JOIN Department d 
+    ON e.departmentId = d.id
+WHERE (
+    SELECT COUNT(DISTINCT e2.salary)
+    FROM Employee e2
+    WHERE e2.departmentId = e.departmentId
+      AND e2.salary > e.salary
+) < 3;
+
+SELECT 
+    t.request_at AS Day,
+    ROUND(
+        SUM(CASE WHEN t.status IN ('cancelled_by_driver', 'cancelled_by_client') THEN 1 ELSE 0 END) 
+        / COUNT(*), 
+        2
+    ) AS "Cancellation Rate"
+FROM Trips t
+JOIN Users c ON t.client_id = c.users_id AND c.banned = 'No'
+JOIN Users d ON t.driver_id = d.users_id AND d.banned = 'No'
+WHERE t.request_at BETWEEN '2013-10-01' AND '2013-10-03'
+GROUP BY t.request_at;
+
+
+SELECT
+  ROUND(
+    COUNT(*) / (SELECT COUNT(DISTINCT player_id) FROM Activity),
+    2
+  ) AS fraction
+FROM Activity a
+JOIN (
+  SELECT player_id, MIN(event_date) AS first_login
+  FROM Activity
+  GROUP BY player_id
+) f
+  ON a.player_id = f.player_id
+ AND a.event_date = DATE_ADD(f.first_login, INTERVAL 1 DAY);
+
+SELECT 
+    ROUND(SUM(tiv_2016), 2) AS tiv_2016
+FROM Insurance
+WHERE tiv_2015 IN (
+        SELECT tiv_2015
+        FROM Insurance
+        GROUP BY tiv_2015
+        HAVING COUNT(*) > 1
+    )
+  AND (lat, lon) IN (
+        SELECT lat, lon
+        FROM Insurance
+        GROUP BY lat, lon
+        HAVING COUNT(*) = 1
+    );
+
+SELECT id, visit_date, people
+FROM Stadium s1
+WHERE people >= 100
+  AND (
+      -- s1 is the first in a 3-row sequence
+      (EXISTS (SELECT 1 FROM Stadium s2, Stadium s3
+               WHERE s2.id = s1.id + 1 AND s3.id = s1.id + 2 
+                 AND s2.people >= 100 AND s3.people >= 100))
+   OR -- s1 is the second in a 3-row sequence
+      (EXISTS (SELECT 1 FROM Stadium s2, Stadium s3
+               WHERE s2.id = s1.id - 1 AND s3.id = s1.id + 1
+                 AND s2.people >= 100 AND s3.people >= 100))
+   OR -- s1 is the third in a 3-row sequence
+      (EXISTS (SELECT 1 FROM Stadium s2, Stadium s3
+               WHERE s2.id = s1.id - 1 AND s3.id = s1.id - 2
+                 AND s2.people >= 100 AND s3.people >= 100))
+  )
+ORDER BY visit_date;
+
+SELECT 
+    id, 
+    COUNT(*) AS num
+FROM (
+    SELECT requester_id AS id FROM RequestAccepted
+    UNION ALL
+    SELECT accepter_id AS id FROM RequestAccepted
+) AS all_friends
+GROUP BY id
+ORDER BY num DESC
+LIMIT 1;
+
+SELECT 
+    id,
+    CASE 
+        WHEN p_id IS NULL THEN 'Root'
+        WHEN id IN (SELECT DISTINCT p_id FROM Tree WHERE p_id IS NOT NULL) THEN 'Inner'
+        ELSE 'Leaf'
+    END AS Type
+FROM Tree;
+
+SELECT 
+    CASE 
+        WHEN id % 2 = 1 AND id + 1 <= (SELECT MAX(id) FROM Seat) THEN id + 1
+        WHEN id % 2 = 0 THEN id - 1
+        ELSE id
+    END AS id,
+    student
+FROM Seat
+ORDER BY id;
+
+# Write your MySQL query statement below
+SELECT customer_id
+FROM Customer
+GROUP BY customer_id
+HAVING COUNT(DISTINCT product_key) = (SELECT COUNT(*) FROM Product);
+
+# Write your MySQL query statement below
+SELECT 
+    s.product_id,
+    p.first_year,
+    s.quantity,
+    s.price
+FROM Sales s
+JOIN (
+    SELECT 
+        product_id, 
+        MIN(year) AS first_year
+    FROM Sales
+    GROUP BY product_id
+) p
+ON s.product_id = p.product_id 
+AND s.year = p.first_year;
+
+# Write your MySQL query statement below
+SELECT person_name
+FROM Queue q1
+WHERE (
+    SELECT SUM(q2.weight)
+    FROM Queue q2
+    WHERE q2.turn <= q1.turn
+) <= 1000
+ORDER BY q1.turn DESC
+LIMIT 1;
+
+# Write your MySQL query statement below
+WITH user_counts AS (
+    SELECT 
+        u.name,
+        COUNT(*) AS cnt
+    FROM MovieRating mr
+    JOIN Users u ON u.user_id = mr.user_id
+    GROUP BY u.user_id, u.name
+),
+top_user AS (
+    SELECT name
+    FROM user_counts
+    ORDER BY cnt DESC, name ASC
+    LIMIT 1
+),
+movie_avg AS (
+    SELECT 
+        m.title,
+        AVG(mr.rating) AS avg_rating
+    FROM MovieRating mr
+    JOIN Movies m ON m.movie_id = mr.movie_id
+    WHERE mr.created_at BETWEEN '2020-02-01' AND '2020-02-29'
+    GROUP BY m.movie_id, m.title
+),
+top_movie AS (
+    SELECT title
+    FROM movie_avg
+    ORDER BY avg_rating DESC, title ASC
+    LIMIT 1
+)
+SELECT 
+    (SELECT name FROM top_user) AS results
+UNION ALL
+SELECT 
+    (SELECT title FROM top_movie) AS results;
+
+# Write your MySQL query statement below
+SELECT stock_name,
+       SUM(CASE WHEN operation = 'Sell' THEN price
+                WHEN operation = 'Buy'  THEN -price
+           END) AS capital_gain_loss
+FROM Stocks
+GROUP BY stock_name;
+
+# Write your MySQL query statement below
+SELECT 
+    s.user_id,
+    ROUND(
+        IFNULL(SUM(c.action = 'confirmed') / COUNT(c.user_id), 0)
+    , 2) AS confirmation_rate
+FROM Signups s
+LEFT JOIN Confirmations c
+    ON s.user_id = c.user_id
+GROUP BY s.user_id;
+
+# Write your MySQL query statement below
+WITH FirstLast AS (
+    SELECT
+        student_id,
+        subject,
+        MIN(exam_date) AS first_date,
+        MAX(exam_date) AS last_date
+    FROM Scores
+    GROUP BY student_id, subject
+    HAVING COUNT(DISTINCT exam_date) >= 2
+),
+Scored AS (
+    SELECT f.student_id, f.subject,
+           s1.score AS first_score,
+           s2.score AS latest_score
+    FROM FirstLast f
+    JOIN Scores s1 
+         ON s1.student_id = f.student_id 
+        AND s1.subject = f.subject 
+        AND s1.exam_date = f.first_date
+    JOIN Scores s2 
+         ON s2.student_id = f.student_id 
+        AND s2.subject = f.subject 
+        AND s2.exam_date = f.last_date
+)
+SELECT student_id, subject, first_score, latest_score
+FROM Scored
+WHERE latest_score > first_score
+ORDER BY student_id, subject;
+
+# Write your MySQL query statement below
+WITH ranked_reviews AS (
+    SELECT 
+        employee_id,
+        rating,
+        review_date,
+        ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY review_date DESC) AS rn
+    FROM performance_reviews
+),
+last_three AS (
+    SELECT *
+    FROM ranked_reviews
+    WHERE rn <= 3
+),
+pivoted AS (
+    SELECT 
+        employee_id,
+        MAX(CASE WHEN rn = 3 THEN rating END) AS first_rating,   -- oldest among last 3
+        MAX(CASE WHEN rn = 2 THEN rating END) AS mid_rating,
+        MAX(CASE WHEN rn = 1 THEN rating END) AS latest_rating   -- most recent
+    FROM last_three
+    GROUP BY employee_id
+),
+improved AS (
+    SELECT 
+        p.employee_id,
+        (latest_rating - first_rating) AS improvement_score
+    FROM pivoted p
+    WHERE first_rating < mid_rating AND mid_rating < latest_rating
+)
+SELECT 
+    e.employee_id,
+    e.name,
+    i.improvement_score
+FROM improved i
+JOIN employees e ON e.employee_id = i.employee_id
+ORDER BY i.improvement_score DESC, e.name ASC;
+
+
+
