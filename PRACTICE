@@ -1313,3 +1313,17 @@ ORDER BY i.improvement_score DESC, e.name ASC;
 
 
 
+CREATE DATABASE COLLEGES ;
+
+use colleges ;
+
+create table student (
+id int primary key,
+name varchar (50),
+age int not null
+);
+ 
+ insert into student values (1, "don" , 33);
+ insert into student values (2,"john" , 34);
+ 
+ select * from student ;
